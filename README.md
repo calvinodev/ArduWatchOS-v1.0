@@ -16,11 +16,10 @@ to the Arduino RX and TX. If you have any problems uploading code, check the hm-
 
 To connect the display to the arduino, connect pins like so:
 
-SCREEN        ADUINO
-GND   -----> GND
-VCC   -----> 3.3V
-SCL   -----> D13
-SDA   -----> D11
-RES   -----> D9
-DC    -----> D8
-CS    -----> D10
+GND to GND
+VCC to 3.3V
+SCL to D13
+SDA to D11
+RES to D9
+DC to D8
+CS to D10
