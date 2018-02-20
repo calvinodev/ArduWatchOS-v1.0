@@ -1,6 +1,20 @@
 # ArduWatchOS-v1.0
 A public operating system for an Arduino smartwatch with an 7 pin ssd1331 display and for use with iOS
 
+The app is not complete, and is not currently available.
+For a recomended app, I suggest HM10 Bluetooth Serial Lite.
+I actually used that app as a way to understand how to use the bluetooth with arduino.
+To send your messages to the arduino have them in this format:
+H00M00S00Q1AAAAAAAAAAAAAAAQ2AAAAAAAAAAAAAAAQ3AAAAAAAAAAAAAAAB$00000.00
+They must all have this amount of characters:
+H:2
+M:2
+S:2
+Q1/2/3:15
+B:9
+
+If any of these do not have these amount of characters, there will be problems, so add black space or zeros for the message.
+
 The first version of the ArduWatchOS software. 
 This version works only with ssd1331 displays. 
 It has only been tested with the hm-10 bluetooth module. 
