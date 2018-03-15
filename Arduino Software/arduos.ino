@@ -44,11 +44,12 @@ void loop() {
   Serial.begin(9600);                      //Start serial
   if(Serial.available()) {                 //If message is recieved from serial (BLE)
     delay(500);                            //Wait for full message (.5 seconds)
-    GetSerialBLE();                        //Split Message Recieved from Serial(BLE) into HOUR, MINUTE, SECOND, MSG1,2,3, and BTCVAL
+    GetSerialBLE();                        //Split Message Recieved from Serial(BLE) into HOUR, MINUTE, SECOND, MSG(1,2,3), and BTCVAL
     DisplayMessage(msg1, msg2, msg3, 5);   //Display the recieved data
   }
   UpdateTime();                            //Update the time
-  DisplayTime(5);                          //Display the time
+  //DisplayTimeDig(5);                     //Display the time (Numbers)
+  DisplayTimeClock();                      //Display the time (Clock)
 }
 
 void DisplayMessage (String m1, String m2, String m3, int delayt)    //Display a message
@@ -147,7 +148,7 @@ void UpdateTime ()          //Update the time
   }
 }
 
-void DisplayTime (int delaytime)        //Display the time on screen
+void DisplayTimeDig (int delaytime)        //Display the time on screen
 { 
   Serial.println(minutes);              //Print minutes to serial (BLE)
   Serial.println(seconds);              //Print seconds to serial (BLE)
@@ -191,4 +192,38 @@ void DisplayTime (int delaytime)        //Display the time on screen
     display.print(BTCVAL);              //Write BTCVAL
 
   seconds += delaytime;                 //Add desired delay time to actual time 
+}
+
+void DisplayTimeClock ()
+{
+  int outlinemin[2] = {0, 0}                                        //Position on the circumfrence of clock circle for minute line
+  int outlinehor[2] = {0, 0}                                        //Position on the circumfrence of clock circle for hours line
+  int outlinesec[2] = {0, 0}                                        //Position on the circumfrence of clock circle for seconds line
+
+  int minangle = 0;                                                 //Angle for minute hand
+  int horangle = 0;                                                 //Angle for hours hand
+  int secangle = 0;                                                 //Angle for second hand
+
+  360/minutes = minangle;                                           //Calculate angle for minutes
+  360/hours = horangle;                                             //Calculate angle for minutes
+  360/seconds = secangle;                                           //Calculate angle for minutes
+
+  outlinemin[0] = 27*cos(minangle)+48;                              //Calculate x position for minute hand
+  outlinemin[1] = 27*cos(minangle)+32;                              //Calculate y position for minute hand 
+  outlinehor[0] = 15*cos(horangle)+48;                              //Calculate x position for minute hand
+  outlinehor[1] = 15*cos(horangle)+32;                              //Calculate y position for minute hand
+  outlinesec[0] = 21*cos(secangle)+48;                              //Calculate x position for minute hand
+  outlinesec[1] = 21*cos(secangle)+32;                              //Calculate y position for minute hand
+  
+  display.drawCircle(48,32,30,WHITE);                               //Draws clock outside
+  display.drawLine(outlinemin[0], outlinemin[1], 48, 32, WHITE);    //Draws minute line
+  display.drawLine(outlinehor[0], outlinehor[1], 48, 32, WHITE);    //Draws hour line
+  display.drawLine(outlinesec[0], outlinesec[1], 48, 32, RED);      //Draws seconds line
+
+  delay(1);
+
+  display.drawLine(outlinemin[0], outlinemin[1], 48, 32, WHITE);    //Erases minute line
+  display.drawLine(outlinehor[0], outlinehor[1], 48, 32, WHITE);    //Erases hour line
+  display.drawLine(outlinesec[0], outlinesec[1], 48, 32, RED);      //Erases seconds line  
+  
 }
