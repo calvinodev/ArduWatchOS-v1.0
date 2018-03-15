@@ -204,9 +204,9 @@ void DisplayTimeClock ()
   int horangle = 0;                                                 //Angle for hours hand
   int secangle = 0;                                                 //Angle for second hand
 
-  360/minutes = minangle;                                           //Calculate angle for minutes
-  360/hours = horangle;                                             //Calculate angle for minutes
-  360/seconds = secangle;                                           //Calculate angle for minutes
+  minangle = 360/minutes;                                           //Calculate angle for minutes
+  horangle = 360/hours;                                             //Calculate angle for minutes
+  secangle = 360/seconds;                                           //Calculate angle for minutes
 
   outlinemin[0] = 27*cos(minangle)+48;                              //Calculate x position for minute hand
   outlinemin[1] = 27*cos(minangle)+32;                              //Calculate y position for minute hand 
