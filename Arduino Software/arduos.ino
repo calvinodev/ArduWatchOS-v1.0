@@ -222,8 +222,8 @@ void DisplayTimeClock ()
 
   delay(1);
 
-  display.drawLine(outlinemin[0], outlinemin[1], 48, 32, WHITE);    //Erases minute line
-  display.drawLine(outlinehor[0], outlinehor[1], 48, 32, WHITE);    //Erases hour line
-  display.drawLine(outlinesec[0], outlinesec[1], 48, 32, RED);      //Erases seconds line  
+  display.drawLine(outlinemin[0], outlinemin[1], 48, 32, BLACK);    //Erases minute line
+  display.drawLine(outlinehor[0], outlinehor[1], 48, 32, BLACK);    //Erases hour line
+  display.drawLine(outlinesec[0], outlinesec[1], 48, 32, BLACK);      //Erases seconds line  
   
 }
