@@ -196,9 +196,9 @@ void DisplayTimeDig (int delaytime)        //Display the time on screen
 
 void DisplayTimeClock ()
 {
-  int outlinemin[2] = {0, 0}                                        //Position on the circumfrence of clock circle for minute line
-  int outlinehor[2] = {0, 0}                                        //Position on the circumfrence of clock circle for hours line
-  int outlinesec[2] = {0, 0}                                        //Position on the circumfrence of clock circle for seconds line
+  int outlinemin[2] = {0, 0};                                       //Position on the circumfrence of clock circle for minute line
+  int outlinehor[2] = {0, 0};                                       //Position on the circumfrence of clock circle for hours line
+  int outlinesec[2] = {0, 0};                                       //Position on the circumfrence of clock circle for seconds line
 
   int minangle = 0;                                                 //Angle for minute hand
   int horangle = 0;                                                 //Angle for hours hand
