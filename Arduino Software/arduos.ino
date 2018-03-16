@@ -44,7 +44,7 @@ String instring = "";            //Whole imput string from BLE
 int clockCenterX = 48;           //Clock center x
 int clockCenterY = 32;           //Clock center y
 
-String clockface = "2";           //What clockface is active
+String clockface = "2";          //What clockface is active
 
 void loop() {  
   Serial.begin(9600);                      //Start serial
@@ -54,10 +54,10 @@ void loop() {
     //DisplayMessage(msg1, msg2, msg3, 5);   //Display the recieved data
   }
   UpdateTime();                            //Update the time
-  if(clockface = "1") {                    //Is clock face digital
+  if(clockface == "1") {                   //Is clock face digital
     DisplayTimeDig(5);                     //Display the time (Numbers)
   }
-  if(clockface = "2") {                    //Is clock face traditional
+  if(clockface == "2") {                   //Is clock face traditional
     DisplayTimeClock();                    //Display the time (Clock)
   } 
   Serial.println(String(minutes));
