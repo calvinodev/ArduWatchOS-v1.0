@@ -13,6 +13,10 @@ S:2
 Q1/2/3:15
 B:9
 
+You can also add a D or a C.
+D changes the clockface to digital.
+C changes the clockface to a traditional clockface.
+
 If any of these do not have these amount of characters, there will be problems, so add black space or zeros for the message.
 
 The first version of the ArduWatchOS software. 
