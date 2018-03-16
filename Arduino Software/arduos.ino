@@ -171,7 +171,7 @@ void UpdateTime ()          //Update the time
     } 
   }
 
-  seconds++;
+  seconds += 3;
 }
 
 void DisplayTimeDig (int delaytime)        //Display the time on screen
@@ -224,123 +224,122 @@ void DisplayTimeClock ()
 {
 
 
-  for (int i=0; i<2; i++)
+  for (int i=0; i<2; i++)                                           //Draw 2 circles, basically a thick circle in the middle
   {
-    display.drawCircle(clockCenterX, clockCenterY, 31-i, WHITE);
+    display.drawCircle(clockCenterX, clockCenterY, 31-i, WHITE);    //Draw the circles
   }
-  for (int i=0; i<3; i++)
+  for (int i=0; i<3; i++)                                           //Draw 3 circles, basically a thick circle as the outside
   {
-    display.drawCircle(clockCenterX, clockCenterY, i, WHITE);
-  }
-  
-  // Draw a small mark for every hour
-  for (int i=0; i<12; i++)
-  {
-    drawMark(i, WHITE);
-  }
-
-  drawSec(seconds, RED);
-  drawMin(minutes, WHITE);
-  drawHour(hours, minutes, WHITE);
-
-  delay(2500);
-
-
-  for (int i=0; i<2; i++)
-  {
-    display.drawCircle(clockCenterX, clockCenterY, 31-i, BLACK);
-  }
-  for (int i=0; i<3; i++)
-  {
-    display.drawCircle(clockCenterX, clockCenterY, i, BLACK);
+    display.drawCircle(clockCenterX, clockCenterY, i, WHITE);       //Draw the circles
   }
   
-  // Draw a small mark for every hour
-  for (int i=0; i<12; i++)
+  
+  for (int i=0; i<12; i++)                                          // Draw a small mark for every hour                                         
   {
-    drawMark(i, BLACK);
+    drawMark(i, WHITE);                                             //Draw the marks
   }
 
-  drawSec(seconds, BLACK);
-  drawMin(minutes, BLACK);
-  drawHour(hours, minutes, BLACK);
+  drawSec(seconds, RED);                                            //Draw the seconds mark
+  drawMin(minutes, WHITE);                                          //Draw the minutes hand
+  drawHour(hours, minutes, WHITE);                                  //Draw the hours hand
+
+  delay(3000);                                                      //Wait 3 seconds                                               
+
+
+  for (int i=0; i<2; i++)                                           //Erase inner circle
+  {
+    display.drawCircle(clockCenterX, clockCenterY, 31-i, BLACK);    //Erase circles
+  }
+  for (int i=0; i<3; i++)                                           //Erase outer circle
+  {
+    display.drawCircle(clockCenterX, clockCenterY, i, BLACK);       //Erase circles
+  }
+  
+  for (int i=0; i<12; i++)                                          //Erase hours marks
+  {
+    drawMark(i, BLACK);                                             //Erase marks
+  }
+
+  drawSec(seconds, BLACK);                                          //Erase seconds mark
+  drawMin(minutes, BLACK);                                          //Erase minutes hand
+  drawHour(hours, minutes, BLACK);                                  //Erase hours hand
 }
 
 
-void drawMark(int h, uint16_t col)
+void drawMark(int h, uint16_t col)                                                                  //Draw a mark
 {
-  float x1, y1, x2, y2;
+  float x1, y1, x2, y2;                                                                             //4 floats for two points
   
-  h=h*30;
-  h=h+270;
+  h=h*30;                                                                                           //Multiply h by 30 for degrees
+  h=h+270;                                                                                          //Add 270 to h for degrees
   
-  x1=29*cos(h*0.0175);
-  y1=29*sin(h*0.0175);
-  x2=26*cos(h*0.0175);
-  y2=26*sin(h*0.0175);
+  x1=29*cos(h*0.0175);                                                                              //Calculate x1 
+  y1=29*sin(h*0.0175);                                                                              //Calculate y1
+  x2=26*cos(h*0.0175);                                                                              //Calculate x2 
+  y2=26*sin(h*0.0175);                                                                              //Calculate y2 
   
-  display.drawLine(x1+clockCenterX, y1+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);
+  display.drawLine(x1+clockCenterX, y1+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);        //Draw the mark
 }
 
-void drawSec(int s, uint16_t col)
+void drawSec(int s, uint16_t col)                                                                     //Draw seconds mark
 {
-  float x1, y1, x2, y2;
+  float x1, y1, x2, y2;                                                                               //4 floats for two points
 
-  s=s*6;
-  s=s+270;
+  s=s*6;                                                                                              //Multiply s by 6 for degrees
+  s=s+270;                                                                                            //Add 270 to s for degrees
   
-  x1=34*cos(s*0.0175);
-  y1=34*sin(s*0.0175);
-  x2=26*cos(s*0.0175);
-  y2=26*sin(s*0.0175);
+  x1=34*cos(s*0.0175);                                                                                //Calculate x1                                                                            
+  y1=34*sin(s*0.0175);                                                                                //Calculate y2 
+  x2=26*cos(s*0.0175);                                                                                //Calculate x2 
+  y2=26*sin(s*0.0175);                                                                                //Calculate y2 
   
   //if ((s % 5) == 0)
   //  display.drawLine(x1+clockCenterX, y1+clockCenterY, x2+clockCenterX, y2+clockCenterY, BLACK);
   //else
-    display.drawLine(x1+clockCenterX, y1+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);
+    display.drawLine(x1+clockCenterX, y1+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);        //Draw the seconds mark
 }
 
-void drawMin(int m, uint16_t col)
+void drawMin(int m, uint16_t col)                                                                     //Draw minutes hand
 {
-  float x1, y1, x2, y2, x3, y3, x4, y4;
+  float x1, y1, x2, y2, x3, y3, x4, y4;                                                               //8 floats for 4 points
 
-  m=m*6;
-  m=m+270;
+  m=m*6;                                                                                              //Multiply m by 6 for degrees
+  m=m+270;                                                                                            //Add 270 to m for degrees
   
-  x1=25*cos(m*0.0175);
-  y1=25*sin(m*0.0175);
-  x2=3*cos(m*0.0175);
-  y2=3*sin(m*0.0175);
-  x3=10*cos((m+8)*0.0175);
-  y3=10*sin((m+8)*0.0175);
-  x4=10*cos((m-8)*0.0175);
-  y4=10*sin((m-8)*0.0175);
+  x1=25*cos(m*0.0175);                                                                                //Calculate x1
+  y1=25*sin(m*0.0175);                                                                                //Calculate y1
+  x2=3*cos(m*0.0175);                                                                                 //Calculate x2
+  y2=3*sin(m*0.0175);                                                                                 //Calculate y2
+  x3=10*cos((m+8)*0.0175);                                                                            //Calculate x3
+  y3=10*sin((m+8)*0.0175);                                                                            //Calculate y3
+  x4=10*cos((m-8)*0.0175);                                                                            //Calculate x4
+  y4=10*sin((m-8)*0.0175);                                                                            //Calculate y4
   
-  display.drawLine(x1+clockCenterX, y1+clockCenterY, x3+clockCenterX, y3+clockCenterY, col);
-  display.drawLine(x3+clockCenterX, y3+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);
-  display.drawLine(x2+clockCenterX, y2+clockCenterY, x4+clockCenterX, y4+clockCenterY, col);
-  display.drawLine(x4+clockCenterX, y4+clockCenterY, x1+clockCenterX, y1+clockCenterY, col);
+  display.drawLine(x1+clockCenterX, y1+clockCenterY, x3+clockCenterX, y3+clockCenterY, col);          //Draw part of minute hand
+  display.drawLine(x3+clockCenterX, y3+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);          //Draw part of minute hand          
+  display.drawLine(x2+clockCenterX, y2+clockCenterY, x4+clockCenterX, y4+clockCenterY, col);          //Draw part of minute hand
+  display.drawLine(x4+clockCenterX, y4+clockCenterY, x1+clockCenterX, y1+clockCenterY, col);          //Draw part of minute hand
 }
 
-void drawHour(int h, int m, uint16_t col)
+void drawHour(int h, int m, uint16_t col)                                                             //Draw hour hand
 {
-  float x1, y1, x2, y2, x3, y3, x4, y4;
+  float x1, y1, x2, y2, x3, y3, x4, y4;                                                               //8 floats for 4 points
 
-  h=(h*30)+(m/2);
-  h=h+270;
+  h=(h*30)+(m/2);                                                                                     //Multiply h by 30 and add it to half of m for degrees
+  h=h+270;                                                                                            //Add 270 to h for degrees
   
-  x1=20*cos(h*0.0175);
-  y1=20*sin(h*0.0175);
-  x2=3*cos(h*0.0175);
-  y2=3*sin(h*0.0175);
-  x3=8*cos((h+12)*0.0175);
-  y3=8*sin((h+12)*0.0175);
-  x4=8*cos((h-12)*0.0175);
-  y4=8*sin((h-12)*0.0175);
+  x1=20*cos(h*0.0175);                                                                                //Calculate x1
+  y1=20*sin(h*0.0175);                                                                                //Calculate y2
+  x2=3*cos(h*0.0175);                                                                                 //Calculate x2
+  y2=3*sin(h*0.0175);                                                                                 //Calculate y2
+  x3=8*cos((h+12)*0.0175);                                                                            //Calculate x3
+  y3=8*sin((h+12)*0.0175);                                                                            //Calculate y3
+  x4=8*cos((h-12)*0.0175);                                                                            //Calculate x4
+  y4=8*sin((h-12)*0.0175);                                                                            //Calculate y4
   
-  display.drawLine(x1+clockCenterX, y1+clockCenterY, x3+clockCenterX, y3+clockCenterY, col);
-  display.drawLine(x3+clockCenterX, y3+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);
-  display.drawLine(x2+clockCenterX, y2+clockCenterY, x4+clockCenterX, y4+clockCenterY, col);
-  display.drawLine(x4+clockCenterX, y4+clockCenterY, x1+clockCenterX, y1+clockCenterY, col);
+  display.drawLine(x1+clockCenterX, y1+clockCenterY, x3+clockCenterX, y3+clockCenterY, col);          //Draw part of hours hand
+  display.drawLine(x3+clockCenterX, y3+clockCenterY, x2+clockCenterX, y2+clockCenterY, col);          //Draw part of hours hand
+  display.drawLine(x2+clockCenterX, y2+clockCenterY, x4+clockCenterX, y4+clockCenterY, col);          //Draw part of hours hand
+  display.drawLine(x4+clockCenterX, y4+clockCenterY, x1+clockCenterX, y1+clockCenterY, col);          //Draw part of hours hand
 }
 
